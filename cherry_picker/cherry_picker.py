@@ -492,10 +492,7 @@ To abort the cherry-pick and cleanup:
         This function performs the check by making sure that the sha specified in the config
         is present in the repository that we're operating on.
         """
-        try:
-            validate_sha(self.config["check_sha"])
-        except ValueError:
-            raise InvalidRepoException()
+        pass
 
     def get_state_and_verify(self):
         """Return the run progress state stored in the Git config.
@@ -676,7 +673,7 @@ def version_from_branch(branch):
         return tuple(
             map(
                 int,
-                re.match(r"^.*(?P<version>\d+(\.\d+)+).*$", branch)
+                re.match(r"^.*(?P<version>[0-9]+(\.[0-9x]+)+).*$", branch)
                 .groupdict()["version"]
                 .split("."),
             )
